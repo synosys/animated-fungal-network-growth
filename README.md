@@ -1,0 +1,2 @@
+# Animated Fungal Network Growth (React + D3 Canvas)
+A canvas-based timelapse visualization of fungal mycelial networks created by Isin Kosemen. It preloads per-frame CSVs (vertices, edges, spatial coordinates) for multiple species and animates growth over time. Color the network by **time sequence** (Viridis) or by a chosen **edge metric** (width, resistance, length) with a customizable palette and live legend.
