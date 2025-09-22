@@ -1,4 +1,3 @@
-# generateData.py
 import os
 import re
 from pathlib import Path
@@ -49,10 +48,9 @@ def process_excel_files(src_dir: Path, dst_dir: Path) -> None:
             continue
 
         path = src_dir / fname
-        base = path.stem  # includes '-results' if present
+        base = path.stem
         print(f"Processing {path.relative_to(BASE_DIR)} → base '{base}'")
 
-        # Read once; then pull sheets by name if present
         try:
             xl = pd.ExcelFile(path)
         except Exception as e:
@@ -79,7 +77,6 @@ def process_excel_files(src_dir: Path, dst_dir: Path) -> None:
             cols = ["EndNodes_1", "EndNodes_2", "name",
                     "Weight", "Length", "Width", "Volume", "Type", "Distance"]
             present = [c for c in cols if c in edges.columns]
-            # keep order: insert edge_id after name (3rd position overall)
             edges_df = edges[present].copy()
             insert_at = min(3, len(edges_df.columns))
             edges_df.insert(insert_at, "edge_id", range(1, len(edges_df) + 1))
@@ -109,7 +106,6 @@ def main():
     # Find species folders in uploads (e.g., absidia/neurospora/wolfiporia)
     species_dirs = sorted([p for p in UPLOADS_DIR.iterdir() if p.is_dir()])
     if not species_dirs:
-        # if Excel files are directly under uploads/, still handle that
         species_dirs = [UPLOADS_DIR]
 
     for sdir in species_dirs:
@@ -121,7 +117,7 @@ def main():
         process_excel_files(sdir, out_subdir)
 
         # Create timeSteps.js for this species folder based on *-results.xlsx names
-        emit_js_timestep_array(sdir, out_subdir / "timeSteps.js")
+        # emit_js_timestep_array(sdir, out_subdir / "timeSteps.js")
 
 if __name__ == "__main__":
     main()
