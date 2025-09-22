@@ -66,7 +66,7 @@ def process_excel_files(src_dir):
             print(f"  ⚠️  Sheet 'Nodes' not found in {fname}")
 
 if __name__ == "__main__":
-    src_directory =  "/Users/isinkosemen/downloads/results (1)"
+    src_directory =  "https://synosys.github.io/animated-fungal-network-growth/uploads"
     if not os.path.isdir(src_directory):
         print(f"Error: source directory not found: {src_directory}")
         exit(1)
